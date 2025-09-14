@@ -38,6 +38,12 @@
                             </a></li>
                         <?php endif; ?>
                         
+                        <?php if (in_array($_SESSION['user_role'], ['admin', 'official'])): ?>
+                            <li><a href="/JanataConnect/reports">
+                                <i class="fas fa-chart-pie"></i> Reports
+                            </a></li>
+                        <?php endif; ?>
+                        
                         <li><a href="/JanataConnect/logout">
                             <i class="fas fa-sign-out-alt"></i> Logout
                         </a></li>

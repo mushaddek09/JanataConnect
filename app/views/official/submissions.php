@@ -4,7 +4,7 @@
     <div class="container">
         <div class="mt-4">
             <h1>Review Submissions</h1>
-            <p>Review and update the status of submissions for your department.</p>
+            <p>Review and update the status of submissions from all departments.</p>
         </div>
 
         <?php if (isset($success)): ?>
@@ -28,10 +28,43 @@
                                 <div class="d-flex justify-between align-center">
                                     <div>
                                         <h3><?php echo htmlspecialchars($submission['title']); ?></h3>
-                                        <p class="text-muted">Submitted by: <?php echo htmlspecialchars($submission['user_name']); ?> (<?php echo htmlspecialchars($submission['user_email']); ?>)</p>
+                                        <p class="text-muted">
+                                            <strong>Department:</strong> <?php echo htmlspecialchars($submission['department_name'] ?? 'Unknown'); ?> | 
+                                            <strong>Submitted by:</strong> <?php echo htmlspecialchars($submission['user_name']); ?> (<?php echo htmlspecialchars($submission['user_email']); ?>)
+                                        </p>
+                                        <?php if (isset($submission['priority'])): ?>
+                                            <p class="text-muted">
+                                                <strong>Priority:</strong> 
+                                                <span class="badge bg-<?php echo $submission['priority'] === 'high' ? 'danger' : ($submission['priority'] === 'medium' ? 'warning' : 'info'); ?>">
+                                                    <?php echo ucfirst($submission['priority']); ?>
+                                                </span>
+                                            </p>
+                                        <?php endif; ?>
                                     </div>
                                     <div class="text-right">
-                                        <span class="badge badge-<?php echo str_replace('_', '-', $submission['status']); ?>">
+                                        <?php
+                                        $statusClass = '';
+                                        switch($submission['status']) {
+                                            case 'pending':
+                                                $statusClass = 'bg-warning';
+                                                break;
+                                            case 'under_review':
+                                                $statusClass = 'bg-info';
+                                                break;
+                                            case 'approved':
+                                                $statusClass = 'bg-success';
+                                                break;
+                                            case 'rejected':
+                                                $statusClass = 'bg-danger';
+                                                break;
+                                            case 'completed':
+                                                $statusClass = 'bg-primary';
+                                                break;
+                                            default:
+                                                $statusClass = 'bg-secondary';
+                                        }
+                                        ?>
+                                        <span class="badge <?php echo $statusClass; ?>">
                                             <?php echo ucfirst(str_replace('_', ' ', $submission['status'])); ?>
                                         </span>
                                         <p class="text-muted mt-2"><?php echo date('M d, Y H:i', strtotime($submission['created_at'])); ?></p>
@@ -99,7 +132,7 @@
             <div class="card text-center">
                 <i class="fas fa-inbox" style="font-size: 4rem; color: #ccc; margin-bottom: 1rem;"></i>
                 <h3>No Submissions to Review</h3>
-                <p>There are no submissions for your department at the moment.</p>
+                <p>There are no submissions from any department at the moment.</p>
             </div>
         <?php endif; ?>
     </div>

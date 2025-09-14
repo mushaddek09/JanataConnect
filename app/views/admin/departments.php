@@ -46,18 +46,18 @@
                                             <td><?php echo htmlspecialchars($dept['name']); ?></td>
                                             <td><?php echo htmlspecialchars(substr($dept['description'] ?? '', 0, 50)) . '...'; ?></td>
                                             <td>
-                                                <span class="badge badge-info"><?php echo $dept['total_submissions'] ?? 0; ?></span>
+                                                <span class="badge bg-info"><?php echo $dept['total_submissions'] ?? 0; ?></span>
                                             </td>
                                             <td>
-                                                <span class="badge badge-<?php echo $dept['is_active'] ? 'success' : 'danger'; ?>">
+                                                <span class="badge bg-<?php echo $dept['is_active'] ? 'success' : 'danger'; ?>">
                                                     <?php echo $dept['is_active'] ? 'Active' : 'Inactive'; ?>
                                                 </span>
                                             </td>
                                             <td>
-                                                <button class="btn btn-sm btn-<?php echo $dept['is_active'] ? 'warning' : 'success'; ?>" 
-                                                        onclick="toggleDepartmentStatus(<?php echo $dept['id']; ?>, <?php echo $dept['is_active'] ? 'false' : 'true'; ?>)">
-                                                    <i class="fas fa-<?php echo $dept['is_active'] ? 'ban' : 'check'; ?>"></i>
-                                                    <?php echo $dept['is_active'] ? 'Deactivate' : 'Activate'; ?>
+                                                <button class="btn btn-sm btn-danger" 
+                                                        onclick="deleteDepartment(<?php echo $dept['id']; ?>)">
+                                                    <i class="fas fa-trash"></i>
+                                                    Delete
                                                 </button>
                                             </td>
                                         </tr>
@@ -106,10 +106,8 @@
                     <div class="mt-3">
                         <?php
                         $activeCount = array_filter($departments, function($dept) { return $dept['is_active']; });
-                        $inactiveCount = count($departments) - count($activeCount);
                         ?>
                         <p><strong>Active:</strong> <?php echo count($activeCount); ?></p>
-                        <p><strong>Inactive:</strong> <?php echo $inactiveCount; ?></p>
                     </div>
                 </div>
             </div>
@@ -118,24 +116,17 @@
 </main>
 
 <script>
-function toggleDepartmentStatus(deptId, newStatus) {
-    const action = newStatus === 'true' ? 'activate' : 'deactivate';
-    if (confirm(`Are you sure you want to ${action} this department?`)) {
+function deleteDepartment(deptId) {
+    if (confirm('Are you sure you want to delete this department? This action cannot be undone.')) {
         const form = document.createElement('form');
         form.method = 'POST';
-        form.action = '<?php echo Config::APP_URL; ?>/admin/department/toggle/' + deptId;
-        
-        const statusInput = document.createElement('input');
-        statusInput.type = 'hidden';
-        statusInput.name = 'is_active';
-        statusInput.value = newStatus;
+        form.action = '<?php echo Config::APP_URL; ?>/admin/department/delete/' + deptId;
         
         const csrfToken = document.createElement('input');
         csrfToken.type = 'hidden';
         csrfToken.name = 'csrf_token';
-        csrfToken.value = '<?php echo Config::generateCSRFToken(); ?>';
+        csrfToken.value = '<?php echo $csrf_token; ?>';
         
-        form.appendChild(statusInput);
         form.appendChild(csrfToken);
         document.body.appendChild(form);
         form.submit();

@@ -34,7 +34,7 @@
                                     <td><?php echo htmlspecialchars($user['name']); ?></td>
                                     <td><?php echo htmlspecialchars($user['email']); ?></td>
                                     <td>
-                                        <span class="badge badge-<?php echo $user['role'] === 'admin' ? 'danger' : ($user['role'] === 'official' ? 'warning' : 'info'); ?>">
+                                        <span class="badge bg-<?php echo $user['role'] === 'admin' ? 'danger' : ($user['role'] === 'official' ? 'warning' : 'info'); ?>">
                                             <?php echo ucfirst($user['role']); ?>
                                         </span>
                                     </td>
@@ -46,7 +46,7 @@
                                         <?php endif; ?>
                                     </td>
                                     <td>
-                                        <span class="badge badge-<?php echo $user['is_active'] ? 'success' : 'danger'; ?>">
+                                        <span class="badge bg-<?php echo $user['is_active'] ? 'success' : 'danger'; ?>">
                                             <?php echo $user['is_active'] ? 'Active' : 'Inactive'; ?>
                                         </span>
                                     </td>

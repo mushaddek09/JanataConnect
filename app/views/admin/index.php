@@ -76,7 +76,7 @@
                                             <td><?php echo htmlspecialchars($submission['user_name']); ?></td>
                                             <td><?php echo htmlspecialchars($submission['department_name']); ?></td>
                                             <td>
-                                                <span class="badge badge-<?php echo str_replace('_', '-', $submission['status']); ?>">
+                                                <span class="badge bg-<?php echo str_replace('_', '-', $submission['status']); ?>">
                                                     <?php echo ucfirst(str_replace('_', ' ', $submission['status'])); ?>
                                                 </span>
                                             </td>
@@ -93,40 +93,6 @@
             </div>
         </div>
 
-        <!-- System Status -->
-        <div class="row mt-4">
-            <div class="col-12">
-                <div class="card">
-                    <h3>System Status</h3>
-                    <div class="row">
-                        <div class="col-3">
-                            <div class="text-center">
-                                <i class="fas fa-database" style="font-size: 2rem; color: var(--success-color);"></i>
-                                <p>Database: <strong>Online</strong></p>
-                            </div>
-                        </div>
-                        <div class="col-3">
-                            <div class="text-center">
-                                <i class="fas fa-server" style="font-size: 2rem; color: var(--success-color);"></i>
-                                <p>Server: <strong>Online</strong></p>
-                            </div>
-                        </div>
-                        <div class="col-3">
-                            <div class="text-center">
-                                <i class="fas fa-users" style="font-size: 2rem; color: var(--info-color);"></i>
-                                <p>Active Users: <strong><?php echo $total_users ?? 0; ?></strong></p>
-                            </div>
-                        </div>
-                        <div class="col-3">
-                            <div class="text-center">
-                                <i class="fas fa-chart-line" style="font-size: 2rem; color: var(--primary-color);"></i>
-                                <p>Platform: <strong>Active</strong></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 </main>
 

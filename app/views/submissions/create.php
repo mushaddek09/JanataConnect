@@ -50,6 +50,18 @@
                         </div>
 
                         <div class="form-group">
+                            <label for="priority" class="form-label">
+                                <i class="fas fa-exclamation-triangle"></i> Priority Level *
+                            </label>
+                            <select id="priority" name="priority" class="form-control" required>
+                                <option value="">Select priority level</option>
+                                <option value="low">Low - General improvement</option>
+                                <option value="medium" selected>Medium - Important issue</option>
+                                <option value="high">High - Urgent/Critical issue</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
                             <label for="description" class="form-label">
                                 <i class="fas fa-edit"></i> Detailed Description *
                             </label>

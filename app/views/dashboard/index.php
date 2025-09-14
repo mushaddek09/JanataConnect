@@ -26,7 +26,7 @@
                                 <div style="border-bottom: 1px solid #eee; padding: 1rem 0;">
                                     <h4><?php echo htmlspecialchars($submission['title']); ?></h4>
                                     <p><?php echo htmlspecialchars(substr($submission['description'], 0, 100)) . '...'; ?></p>
-                                    <span class="badge badge-<?php echo str_replace('_', '-', $submission['status']); ?>">
+                                    <span class="badge bg-<?php echo str_replace('_', '-', $submission['status']); ?>">
                                         <?php echo ucfirst(str_replace('_', ' ', $submission['status'])); ?>
                                     </span>
                                 </div>
@@ -62,7 +62,7 @@
                                                 <td><?php echo htmlspecialchars($submission['title']); ?></td>
                                                 <td><?php echo htmlspecialchars($submission['user_name']); ?></td>
                                                 <td>
-                                                    <span class="badge badge-<?php echo str_replace('_', '-', $submission['status']); ?>">
+                                                    <span class="badge bg-<?php echo str_replace('_', '-', $submission['status']); ?>">
                                                         <?php echo ucfirst(str_replace('_', ' ', $submission['status'])); ?>
                                                     </span>
                                                 </td>
@@ -86,6 +86,18 @@
                     <div class="stat-label">Total Submissions</div>
                 </div>
                 <div class="stat-card">
+                    <div class="stat-number"><?php echo $statistics['pending'] ?? 0; ?></div>
+                    <div class="stat-label">Pending</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number"><?php echo $statistics['approved'] ?? 0; ?></div>
+                    <div class="stat-label">Approved</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number"><?php echo $statistics['completed'] ?? 0; ?></div>
+                    <div class="stat-label">Completed</div>
+                </div>
+                <div class="stat-card">
                     <div class="stat-number"><?php echo $total_users ?? 0; ?></div>
                     <div class="stat-label">Total Users</div>
                 </div>
@@ -106,7 +118,7 @@
                                 <div style="border-bottom: 1px solid #eee; padding: 1rem 0;">
                                     <h4><?php echo htmlspecialchars($submission['title']); ?></h4>
                                     <p>By: <?php echo htmlspecialchars($submission['user_name']); ?></p>
-                                    <span class="badge badge-<?php echo str_replace('_', '-', $submission['status']); ?>">
+                                    <span class="badge bg-<?php echo str_replace('_', '-', $submission['status']); ?>">
                                         <?php echo ucfirst(str_replace('_', ' ', $submission['status'])); ?>
                                     </span>
                                 </div>
